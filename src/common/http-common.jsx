@@ -1,19 +1,22 @@
 import axios from "axios";
 
-let tokenLocalStorage = localStorage.getItem("token");
+// Lấy token từ localStorage
+const tokenLocalStorage = localStorage.getItem("token");
 const token =
   tokenLocalStorage != null ? tokenLocalStorage.replaceAll('"', "") : "";
+
+// Tạo instance Axios
 const axiosInstance = axios.create({
-  baseUrl: "http://localhost:8000",
+  baseURL: process.env.REACT_APP_API_SERVER,
   withCredentials: true,
   headers: {
-    "Content-Type": "application/json",
     Accept: "application/json",
-    Authorization: `Bearer ${token}`,
+    Authorization: token ? `Bearer ${token}` : "", // Nếu có token thì thêm vào header
   },
 });
 
-axiosInstance.defaults.baseURL = "http://localhost:8000";
+// Cập nhật baseURL nếu cần
+axiosInstance.defaults.baseURL = process.env.REACT_APP_API_SERVER;
 
 export const get = async (
   url,

@@ -9,7 +9,9 @@ function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
-      {userData.user.role[0].roleName === "Admin" &&
+
+      {/* check role  */}
+      {/* {userData.user.role[0].roleName === "Admin" &&
         adminRoutes.map((route, index) => {
           return (
             <Route
@@ -19,7 +21,20 @@ function App() {
               element={route.element}
             />
           );
+        })} */}
+
+         {/* do not check role  */}
+         { adminRoutes.map((route, index) => {
+          return (
+            <Route
+              exact
+              key={index}
+              path={route.path}
+              element={route.element}
+            />
+          );
         })}
+        
       {clientRoutes.map((route, index) => {
         return (
           <Route exact key={index} path={route.path} element={route.element} />

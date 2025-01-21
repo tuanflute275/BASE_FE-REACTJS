@@ -1,10 +1,10 @@
 import * as http from "../common/http-common";
 
-const URLAPI = "http://localhost:8080";
+const URLAPI = `${process.env.REACT_APP_API_SERVER}/v1/product`;
 
 export const findAll = async () => {
   try {
-    const res = await http.get(`${URLAPI}/products`);
+    const res = await http.get(`${URLAPI}`);
     return [res, null];
   } catch (error) {
     return [null, error];
@@ -13,7 +13,7 @@ export const findAll = async () => {
 
 export const findById = async (id) => {
   try {
-    const res = await http.get(`${URLAPI}/products/${id}`);
+    const res = await http.get(`${URLAPI}/${id}`);
     return [res, null];
   } catch (error) {
     return [null, error];
@@ -31,7 +31,7 @@ export const upload = async (data) => {
 
 export const save = async (data) => {
   try {
-    const res = await http.save(`${URLAPI}/products`, data);
+    const res = await http.save(`${URLAPI}`, data);
     return [res, null];
   } catch (error) {
     return [null, error];
@@ -40,7 +40,7 @@ export const save = async (data) => {
 
 export const update = async (id, data) => {
   try {
-    const res = await http.put(`${URLAPI}/products/${id}`, data);
+    const res = await http.put(`${URLAPI}/${id}`, data);
     return [res, null];
   } catch (error) {
     return [null, error];
@@ -49,7 +49,7 @@ export const update = async (id, data) => {
 
 export const remove = async (id) => {
   try {
-    const res = await http.remove(`${URLAPI}/products/${id}`);
+    const res = await http.remove(`${URLAPI}/${id}`);
     return [res, null];
   } catch (error) {
     return [null, error];

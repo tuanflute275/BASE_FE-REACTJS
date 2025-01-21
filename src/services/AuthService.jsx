@@ -1,6 +1,6 @@
 import * as http from "../common/http-common";
 
-const URLAPI = "http://localhost:8080";
+const URLAPI = process.env.REACT_APP_API_SERVER;
 
 export const login = async (data) => {
   try {

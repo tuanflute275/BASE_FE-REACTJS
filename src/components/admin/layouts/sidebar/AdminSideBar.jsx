@@ -43,11 +43,6 @@ const AdminSideBar = () => {
                 <i className="ri-record-circle-line"></i>Quản Lý Sản Phẩm
               </Link>
             </li>
-            <li>
-              <Link to={"/admin/blog"}>
-                <i className="ri-record-circle-line"></i>Quản Lý Tin Tức
-              </Link>
-            </li>
           </ul>
         </nav>
         <div id="sidebar-bottom" className="p-3 position-relative">

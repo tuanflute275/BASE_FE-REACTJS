@@ -1,7 +1,4 @@
 import AdminMasterLayout from "../components/admin/layouts/AdminMasterLayout";
-import AddBlog from "../components/admin/pages/blog/add/AddBlog";
-import ListBlog from "../components/admin/pages/blog/list/ListBlog";
-import UpdateBlog from "../components/admin/pages/blog/update/UpdateBlog";
 import AddCategory from "../components/admin/pages/category/add/AddCategory";
 import ListCategory from "../components/admin/pages/category/list/ListCategory";
 import UpdateCategory from "../components/admin/pages/category/update/UpdateCategory";
@@ -42,19 +39,7 @@ export const adminRoutes = [
   {
     path: "admin/product/update/:id",
     element: <AdminMasterLayout child={<UpdateProduct />} />,
-  },
-  {
-    path: "admin/blog",
-    element: <AdminMasterLayout child={<ListBlog />} />,
-  },
-  {
-    path: "admin/blog/add",
-    element: <AdminMasterLayout child={<AddBlog />} />,
-  },
-  {
-    path: "admin/blog/update/:id",
-    element: <AdminMasterLayout child={<UpdateBlog />} />,
-  },
+  }
 ];
 
 export const clientRoutes = [

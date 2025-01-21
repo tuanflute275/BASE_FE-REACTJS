@@ -9,38 +9,16 @@ const ListCategory = () => {
   const [keyword, setKeyword] = useState("");
 
   //pagination
-  const [currentPage, setCurrentPage] = useState(1);
-  const recordsPerPage = 5;
-  const lastIndex = currentPage * recordsPerPage;
-  const firstIndex = lastIndex - recordsPerPage;
-  const records = apiData.slice(firstIndex, lastIndex);
-  const npage = Math.ceil(apiData.length / recordsPerPage);
-  const numbers = [...Array(npage + 1).keys()].slice(1);
-
   const fetchApiData = async () => {
     const [res, err] = await categoryService.findAll();
     if (res) {
+      console.log(res.data)
       setApiData(res.data);
     } else {
       console.log(err);
     }
   };
 
-  const prePage = () => {
-    if (currentPage !== 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  const changePage = (page) => {
-    setCurrentPage(page);
-  };
-
-  const nextPage = () => {
-    if (currentPage !== npage) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
 
   const handleChangeValue = async (e) => {
     setKeyword(e.target.value);
@@ -131,21 +109,13 @@ const ListCategory = () => {
                     </thead>
                     <tbody>
                       {apiData &&
-                        records
-                          .filter((item) => {
-                            return keyword.toLowerCase() === ""
-                              ? item
-                              : item.categoryName
-                                  .toLowerCase()
-                                  .includes(keyword);
-                          })
-                          .map((item) => {
+                        apiData.map((item) => {
                             return (
                               <tr key={item.categoryId}>
                                 <td>{item.categoryId}</td>
-                                <td>{item.categoryName}</td>
+                                <td>{item.name}</td>
                                 <td>
-                                  {item.categoryStatus === 1 ? "Hiện" : "Ẩn"}
+                                  {item.isActive ? "Hiện" : "Ẩn"}
                                 </td>
                                 <td>
                                   <div className="flex align-items-center list-user-action">
@@ -189,44 +159,6 @@ const ListCategory = () => {
                           })}
                     </tbody>
                   </table>
-                  <nav aria-label="...">
-                    <ul className="pagination">
-                      <li
-                        className={`page-item ${
-                          currentPage === 1 ? "disabled" : ""
-                        }`}
-                      >
-                        <a className="page-link" href="#" onClick={prePage}>
-                          Previous
-                        </a>
-                      </li>
-                      {numbers.map((n, i) => (
-                        <li
-                          className={`page-item ${
-                            currentPage === n ? "active" : ""
-                          }`}
-                          key={i}
-                        >
-                          <a
-                            className="page-link"
-                            href="#"
-                            onClick={() => changePage(n)}
-                          >
-                            {n}
-                          </a>
-                        </li>
-                      ))}
-                      <li
-                        className={`page-item ${
-                          currentPage === npage ? "disabled" : ""
-                        }`}
-                      >
-                        <a className="page-link" href="#" onClick={nextPage}>
-                          Next
-                        </a>
-                      </li>
-                    </ul>
-                  </nav>
                 </div>
               </div>
             </div>
